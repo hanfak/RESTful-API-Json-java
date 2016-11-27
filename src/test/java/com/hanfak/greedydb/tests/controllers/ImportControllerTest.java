@@ -34,4 +34,18 @@ public class ImportControllerTest extends JerseyTest{
 		final String output = target("/import/click").request().get(String.class);
 		assertThat(output, containsString("1460442540"));
 	}
+	
+	@Test
+	public void EmployersPathWorking() {
+		Response output = target("/import/employer").request().get();
+		assertEquals("should return status 200", 200, output.getStatus());
+//		assertEquals( "application/json", output.getMediaType().toString());
+//		assertNotNull("Should return list", output.getEntity());
+	}
+	
+	@Test
+	public void EmployersReturnJson() {
+		final String output = target("/import/employer").request().get(String.class);
+		assertThat(output, containsString("1460463641"));
+	}
 }

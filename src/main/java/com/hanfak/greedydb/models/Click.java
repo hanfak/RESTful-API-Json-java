@@ -33,24 +33,31 @@ public class Click {
 	public String getStreamName() {
 		return streamName;
 	}
+	
 	public void setStreamName(String streamName) {
 		this.streamName = streamName;
 	}
+	
 	public String getTimestamp() {
 		return timestamp;
 	}
+	
 	public void setTimestamp(String num) {
 		this.timestamp = num;
 	}
+	
 	public String getPage() {
 		return page;
 	}
+	
 	public void setPage(String page) {
 		this.page = page;
 	}
+	
 	public Origin getOrigin() {
 		return origin;
 	}
+	
 	public void setOrigin(Origin origin) {
 		this.origin = origin;
 	}
