@@ -1,5 +1,6 @@
 package com.hanfak.greedydb.tests.controllers;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.*;
 
 import javax.ws.rs.core.Application;
@@ -20,9 +21,17 @@ public class ImportControllerTest extends JerseyTest{
         return new ResourceConfig(ImportController.class);
     }
 	
-  @Test
-  public void testFetchAllClicks() {
-      Response output = target("/import/click").request().get();
-      assertEquals("should return status 200", 200, output.getStatus());
-  }
+	@Test
+	public void ClicksPathWorking() {
+		Response output = target("/import/click").request().get();
+		assertEquals("should return status 200", 200, output.getStatus());
+//		assertEquals( "application/json", output.getMediaType().toString());
+//		assertNotNull("Should return list", output.getEntity());
+	}
+  
+	@Test
+	public void ClicksReturnJson() {
+		final String output = target("/import/click").request().get(String.class);
+		assertThat(output, containsString("1460442540"));
+	}
 }
