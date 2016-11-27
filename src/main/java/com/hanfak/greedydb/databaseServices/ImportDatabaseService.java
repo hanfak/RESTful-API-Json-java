@@ -65,7 +65,7 @@ public class ImportDatabaseService {
     private DBCursor allStreamNameQuery(DBCollection collection, String streamName) {
 	    BasicDBObject whereQuery = new BasicDBObject();
 	    whereQuery.put("streamName", streamName);
-	    return DatabaseCollection().find(whereQuery);
+	    return collection.find(whereQuery);
     }
     
     private DBCollection DatabaseCollection() {
