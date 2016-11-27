@@ -1,24 +1,27 @@
 package com.hanfak.greedydb.databaseServices;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
+import com.hanfak.greedydb.databaseQueryManager.QueryManager;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
 
 public class QueryDatabaseService {
+	private QueryManager queryManager = new QueryManager();
+	
 	public String getFieldValue(String streamName,
-			String timestamp, 
-			String jsonPath) {
+								String timestamp, 
+								String jsonPath) {
 		String value = "";
-		DBCursor cursor = findJsonPathQuery(streamName, timestamp);
-		value = retrieveValueOfJsonPath(cursor, jsonPath);
-		cursor.close();
+		try{
+			DBCursor cursor = queryManager.findJsonPathQuery(streamName, timestamp);
+			value = retrieveValueOfJsonPath(cursor, jsonPath);
+			cursor.close();
+			return value;
+		} catch(Exception e) {
+			System.err.println(e);
+		}
 		return value;
 	}
 	
@@ -36,26 +39,4 @@ public class QueryDatabaseService {
 		}
 		return value;
 	}
-	
-	private DBCollection DatabaseCollection() {
-	    MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
-		
-		DB db = mongoClient.getDB( "test" );
-		System.out.println("Connect to database successfully");
-		
-		DBCollection collection = db.getCollection("streams");
-		System.out.println("Collection mycol selected successfully");
-	   
-	    return collection;
-	 }
-    
-	private DBCursor findJsonPathQuery(String streamName, String timestamp) {
-		BasicDBObject whereQuery = new BasicDBObject();
-		List<BasicDBObject> obj = new ArrayList<BasicDBObject>();
-		obj.add(new BasicDBObject("streamName", streamName));
-		obj.add(new BasicDBObject("timestamp", Integer.parseInt(timestamp)));
-		whereQuery.put("$and", obj);
-		return DatabaseCollection().find(whereQuery);
-	}
-    
 }

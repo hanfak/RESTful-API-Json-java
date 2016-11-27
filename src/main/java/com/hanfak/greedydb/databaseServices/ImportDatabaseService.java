@@ -3,23 +3,21 @@ package com.hanfak.greedydb.databaseServices;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.hanfak.greedydb.databaseQueryManager.QueryManager;
 import com.hanfak.greedydb.models.Click;
 import com.hanfak.greedydb.models.Employer;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
 
 public class ImportDatabaseService {
 	private ArrayList<Click> clicks  = new ArrayList<Click>();
 	private ArrayList<Employer> employers  = new ArrayList<Employer>();
+	private QueryManager queryManager = new QueryManager();
 	
 	public  List<Click> getClickObjects() {
 	   try{   
-		     DBCursor cursor = allStreamNameQuery(DatabaseCollection(), "clicks");
+		     DBCursor cursor = queryManager.allStreamNameQuery("clicks");
 		     listOfClickObjects(clicks, cursor);
 		     cursor.close();
 	         return clicks;
@@ -31,7 +29,7 @@ public class ImportDatabaseService {
 	
 	public  List<Employer> getEmployerObjects() {
 	   try{   
-		     DBCursor cursor = allStreamNameQuery(DatabaseCollection(), "employers");
+		     DBCursor cursor = queryManager.allStreamNameQuery("employers");
 		     listOfEmployerObjects(employers, cursor);
 		     cursor.close();
 	         return employers;
@@ -61,24 +59,6 @@ public class ImportDatabaseService {
 		 }
 		 return employers;
 	}
-    
-    private DBCursor allStreamNameQuery(DBCollection collection, String streamName) {
-	    BasicDBObject whereQuery = new BasicDBObject();
-	    whereQuery.put("streamName", streamName);
-	    return collection.find(whereQuery);
-    }
-    
-    private DBCollection DatabaseCollection() {
-        MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
-			
-        DB db = mongoClient.getDB( "test" );
-        System.out.println("Connect to database successfully");
-
-        DBCollection collection = db.getCollection("streams");
-        System.out.println("Collection mycol selected successfully");
-       
-        return collection;
-     }
     
 	 private void storeClickObject(Click click, Click.Origin origin, DBObject obj) {
 		 click.setPage((String) obj.get("page"));
