@@ -24,10 +24,10 @@ public class QueryManager {
 	    return MongoDBConnectionManager.databaseCollection().find(whereQuery);
     }
     
-    public DBCursor findLatestJsonPathQuery(String streamName) {
+    public DBCursor findTimedJsonPathQuery(String streamName, int orderValue) {
     	BasicDBObject whereQuery = new BasicDBObject();
 	    whereQuery.put("streamName", streamName);
 	    DBCursor cursor = MongoDBConnectionManager.databaseCollection().find(whereQuery);
-	    return cursor.sort(new BasicDBObject("timestamp", -1)).limit(1);
+	    return cursor.sort(new BasicDBObject("timestamp", orderValue)).limit(1);
     }
 }

@@ -33,4 +33,14 @@ public class QueryController {
 			) {
 		return databaseService.getLatestValue(streamName, jsonPath);
 	}
+	
+	@GET
+	@Path("/{streamName}/oldest/{jsonPath:.*}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String showOldestField(
+			@PathParam("streamName") String streamName,
+			@PathParam("jsonPath") String jsonPath
+			) {
+		return databaseService.getOldestValue(streamName, jsonPath);
+	}
 }

@@ -26,8 +26,6 @@ public class QueryControllerTest extends JerseyTest {
 	public void specificPathWorking() {
 		Response output = target("/query/click/1460442540/origin/band").request().get();
 		assertEquals("should return status 200", 200, output.getStatus());
-//		assertEquals( "application/json", output.getMediaType().toString());
-//		assertNotNull("Should return list", output.getEntity());
 	}
 	
 	@Test

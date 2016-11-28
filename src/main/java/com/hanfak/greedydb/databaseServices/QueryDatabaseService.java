@@ -4,12 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.hanfak.greedydb.databaseQueryManager.QueryManager;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
 
 public class QueryDatabaseService {
 	private QueryManager queryManager = new QueryManager();
@@ -33,7 +29,21 @@ public class QueryDatabaseService {
 								 String jsonPath) {
 		String value = ""; 
 		try{
-			DBCursor cursor = queryManager.findLatestJsonPathQuery(streamName);
+			DBCursor cursor = queryManager.findTimedJsonPathQuery(streamName, -1);
+			value = retrieveValueOfJsonPath(cursor, jsonPath);
+			cursor.close();
+			return value;
+		} catch(Exception e) {
+			System.err.println(e);
+		}
+		return value;
+	}
+	
+	public String getOldestValue(String streamName,
+			 					 String jsonPath) {
+		String value = ""; 
+		try{
+			DBCursor cursor = queryManager.findTimedJsonPathQuery(streamName, 1);
 			value = retrieveValueOfJsonPath(cursor, jsonPath);
 			cursor.close();
 			return value;
