@@ -25,25 +25,12 @@ public class QueryDatabaseService {
 		return value;
 	}
 	
-	public String getLatestValue(String streamName,
-								 String jsonPath) {
+	public String getTimedValue(String streamName,
+			 					 String jsonPath, 
+			 					 int ordering) {
 		String value = ""; 
 		try{
-			DBCursor cursor = queryManager.findTimedJsonPathQuery(streamName, -1);
-			value = retrieveValueOfJsonPath(cursor, jsonPath);
-			cursor.close();
-			return value;
-		} catch(Exception e) {
-			System.err.println(e);
-		}
-		return value;
-	}
-	
-	public String getOldestValue(String streamName,
-			 					 String jsonPath) {
-		String value = ""; 
-		try{
-			DBCursor cursor = queryManager.findTimedJsonPathQuery(streamName, 1);
+			DBCursor cursor = queryManager.findTimedJsonPathQuery(streamName, ordering);
 			value = retrieveValueOfJsonPath(cursor, jsonPath);
 			cursor.close();
 			return value;

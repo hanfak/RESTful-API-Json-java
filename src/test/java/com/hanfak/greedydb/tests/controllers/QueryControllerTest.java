@@ -35,8 +35,26 @@ public class QueryControllerTest extends JerseyTest {
 	}
 	
 	@Test
-	public void latestPathReturnValue() {
+	public void latestPathReturnValueForEmployer() {
 		final String output = target("/query/employers/latest/id").request().get(String.class);
 		assertThat(output, containsString("667732"));
+	}
+	
+	@Test
+	public void latestPathReturnValueForClick() {
+		final String output = target("/query/clicks/latest/page").request().get(String.class);
+		assertThat(output, containsString("/profile.html"));
+	}
+	
+	@Test
+	public void oldestPathReturnValueForEmployer() {
+		final String output = target("/query/employers/oldest/id").request().get(String.class);
+		assertThat(output, containsString("1180023"));
+	}
+	
+	@Test
+	public void oldestPathReturnValueForClick() {
+		final String output = target("/query/clicks/oldest/page").request().get(String.class);
+		assertThat(output, containsString("/error.html"));
 	}
 }

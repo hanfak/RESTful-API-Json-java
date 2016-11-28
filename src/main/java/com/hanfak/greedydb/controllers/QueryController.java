@@ -31,7 +31,7 @@ public class QueryController {
 			@PathParam("streamName") String streamName,
 			@PathParam("jsonPath") String jsonPath
 			) {
-		return databaseService.getLatestValue(streamName, jsonPath);
+		return databaseService.getTimedValue(streamName, jsonPath, -1);
 	}
 	
 	@GET
@@ -41,6 +41,6 @@ public class QueryController {
 			@PathParam("streamName") String streamName,
 			@PathParam("jsonPath") String jsonPath
 			) {
-		return databaseService.getOldestValue(streamName, jsonPath);
+		return databaseService.getTimedValue(streamName, jsonPath, 1);
 	}
 }
