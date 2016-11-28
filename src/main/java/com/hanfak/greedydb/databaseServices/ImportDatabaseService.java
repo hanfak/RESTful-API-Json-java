@@ -3,6 +3,7 @@ package com.hanfak.greedydb.databaseServices;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.hanfak.greedydb.databaseConnections.MongoDBConnectionManager;
 import com.hanfak.greedydb.databaseQueryManager.QueryManager;
 import com.hanfak.greedydb.models.Click;
 import com.hanfak.greedydb.models.Employer;
@@ -13,7 +14,7 @@ import com.mongodb.DBObject;
 public class ImportDatabaseService {
 	private ArrayList<Click> clicks  = new ArrayList<Click>();
 	private ArrayList<Employer> employers  = new ArrayList<Employer>();
-	private QueryManager queryManager = new QueryManager();
+	private QueryManager queryManager = new QueryManager(new MongoDBConnectionManager());
 	
 	public  List<Click> getClickObjects() {
 	   try{   

@@ -5,7 +5,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 
 public class MongoDBConnectionManager {
-	public static DBCollection databaseCollection() {
+	public DBCollection retrieveCollection() {
 	    MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
 		
 		DB db = mongoClient.getDB( "test" );

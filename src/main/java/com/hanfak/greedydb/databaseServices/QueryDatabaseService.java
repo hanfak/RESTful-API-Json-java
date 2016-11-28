@@ -3,12 +3,13 @@ package com.hanfak.greedydb.databaseServices;
 import java.util.Arrays;
 import java.util.List;
 
+import com.hanfak.greedydb.databaseConnections.MongoDBConnectionManager;
 import com.hanfak.greedydb.databaseQueryManager.QueryManager;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
 public class QueryDatabaseService {
-	private QueryManager queryManager = new QueryManager();
+	private QueryManager queryManager = new QueryManager(new MongoDBConnectionManager());
 	
 	public String getFieldValue(String streamName,
 								String timestamp, 
