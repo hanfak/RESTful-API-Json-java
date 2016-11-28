@@ -18,7 +18,7 @@ public class ImportDatabaseService {
 	
 	public  List<Click> getClickObjects() {
 	   try{   
-		     DBCursor cursor = queryManager.allStreamNameQuery("clicks");
+		     DBCursor cursor = queryManager.allStreamNameQuery("click");
 		     listOfClickObjects(clicks, cursor);
 		     cursor.close();
 	         return clicks;
@@ -30,7 +30,7 @@ public class ImportDatabaseService {
 	
 	public  List<Employer> getEmployerObjects() {
 	   try{   
-		     DBCursor cursor = queryManager.allStreamNameQuery("employers");
+		     DBCursor cursor = queryManager.allStreamNameQuery("employer");
 		     listOfEmployerObjects(employers, cursor);
 		     cursor.close();
 	         return employers;

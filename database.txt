@@ -1,0 +1,58 @@
+//Create test database
+
+use test
+
+//delete prior data
+
+db.streams.drop()
+
+//Create collection streams, and seed with data
+
+db.streams.insert([{
+        "streamName" : "employer",
+      	"timestamp": 1460463641,
+      	"id": "88837264",
+      	"name": "Davide",
+      	"surname": "Palmisano"
+      }, {
+        "streamName" : "employer",
+      	"timestamp": 1460465692,
+      	"id": "667732",
+      	"name": "Jonh",
+      	"surname": "Foobar"
+      },
+      {
+      "streamName" : "employer",
+      	"timestamp": 1460462644,
+      	"id": "1180023",
+      	"name": "Davide",
+      	"surname": "Palmisano"
+      },
+      {
+        "streamName" : "click",
+        "timestamp" : 1460442540,
+        "page" : "/login.html",
+        "origin" : {
+          "brand" : "hcom",
+          "post" : "UK"
+        }
+      },
+      {
+        "streamName" : "click",
+        "timestamp" : 1460422614,
+        "page" : "/error.html",
+        "origin" : {
+          "brand" : "hcom",
+          "post" : "US"
+        }
+      },
+      {
+      "streamName" : "click",
+        "timestamp" : 1460492344,
+        "page" : "/profile.html",
+        "origin" : {
+          "brand" : "venere",
+          "post" : "UK"
+        }
+      }
+      ])

@@ -23,38 +23,32 @@ public class QueryControllerTest extends JerseyTest {
     }
 	
 	@Test
-	public void specificPathWorking() {
-		Response output = target("/query/click/1460442540/origin/band").request().get();
-		assertEquals("should return status 200", 200, output.getStatus());
-	}
-	
-	@Test
 	public void specificPathReturnValue() {
-		final String output = target("/query/clicks/1460422614/origin/brand").request().get(String.class);
+		final String output = target("/query/click/1460422614/origin/brand").request().get(String.class);
 		assertThat(output, containsString("hcom"));
 	}
 	
 	@Test
 	public void latestPathReturnValueForEmployer() {
-		final String output = target("/query/employers/latest/id").request().get(String.class);
+		final String output = target("/query/employer/latest/id").request().get(String.class);
 		assertThat(output, containsString("667732"));
 	}
 	
 	@Test
 	public void latestPathReturnValueForClick() {
-		final String output = target("/query/clicks/latest/page").request().get(String.class);
+		final String output = target("/query/click/latest/page").request().get(String.class);
 		assertThat(output, containsString("/profile.html"));
 	}
 	
 	@Test
 	public void oldestPathReturnValueForEmployer() {
-		final String output = target("/query/employers/oldest/id").request().get(String.class);
+		final String output = target("/query/employer/oldest/id").request().get(String.class);
 		assertThat(output, containsString("1180023"));
 	}
 	
 	@Test
 	public void oldestPathReturnValueForClick() {
-		final String output = target("/query/clicks/oldest/page").request().get(String.class);
+		final String output = target("/query/click/oldest/page").request().get(String.class);
 		assertThat(output, containsString("/error.html"));
 	}
 }
