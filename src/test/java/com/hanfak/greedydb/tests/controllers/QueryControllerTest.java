@@ -35,4 +35,10 @@ public class QueryControllerTest extends JerseyTest {
 		final String output = target("/query/clicks/1460422614/origin/brand").request().get(String.class);
 		assertThat(output, containsString("hcom"));
 	}
+	
+	@Test
+	public void latestPathReturnValue() {
+		final String output = target("/query/employers/latest/id").request().get(String.class);
+		assertThat(output, containsString("667732"));
+	}
 }

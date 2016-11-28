@@ -23,4 +23,14 @@ public class QueryController {
 			) {
 		return databaseService.getFieldValue(streamName, timestamp, jsonPath);
 	}
+	
+	@GET
+	@Path("/{streamName}/latest/{jsonPath:.*}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String showLatestField(
+			@PathParam("streamName") String streamName,
+			@PathParam("jsonPath") String jsonPath
+			) {
+		return databaseService.getLatestValue(streamName, jsonPath);
+	}
 }
