@@ -34,13 +34,13 @@ User will only be able to access records that is within 30 minutes of the lastes
 
 I made the assumption that the database was already setup, and it was being given data through another server. Thus I just needed to access this database through the RESTful apis.
 
-I decided to use MongoDB as my database, due to the contents of the data being json objects and embedded json objects. Plus the fields were different for each streamName, which would not suit using relational databases.
+I decided to use MongoDB as my database, due to the contents of the data being json objects and embedded json objects. Plus the fields were different for each streamName, which would not suit using relational databases where fields names are constant.
 
 I decided to use Jersey to handle the routes. MongoDB driver to handle the connection with the database. Moxey to convert my models of stored data into Json for output.
 
-I used the MVC pattern, where the Resouce files are the controllers, which asks the Service files to handle the interaction between the model and the database (ie make a db connection, query and store in data in model objects) and return the required output (ie json or string value). The view was not handled as it was a json api.
+I used the MVC pattern, where the Resource files are the controllers, which asks the Service files to handle the interaction between the model and the database (ie make a db connection, query and store in data in model objects) and return the required output (ie json or string value). The view was not handled as it was a json api.
 
-As Java is fairly new to me, I decided to learn how to build a restful api and then how to use the testing framework (junit and jersey testing). I managed to do spike the web app, but took longer than expected, thus I did not have enough time for testing the everything (ie database). Then I started from scratch and did a test driven approach but did not manage to finish all my testing.
+As Java is fairly new to me, I decided to learn how to build a restful api first and then how to use the testing framework (junit and jersey testing). I managed to do spike of the web app, but took longer than expected, thus I only had time to test the routes and not the database when starting from scratch doing TDD.
 
 ## Completed
 
@@ -56,12 +56,12 @@ I kept the code for the controller route which was not working in the ImportReso
 
 - This works for the two different types of streams, click and employer, but will have to constantly add new code to the service, model, dbconnection and resource files to accept different types of streams. So it is not easily exentendable.
 
-- Mongdb driver methods I am using are deprecated. Unfortunately, aiming to use the new methods, I had issues with implementing fully this new version with extracting 'click' records from database. I decided to stick with the deprecated methods and keep the code clean as I was able to extract out the mongodb connection code to a method.
+- Mongodb driver methods I am using are deprecated. Unfortunately, aiming to use the new methods, I had issues with implementing fully this new version with extracting 'click' records from database. I decided to stick with the deprecated methods and keep the code clean as I was able to extract out the mongodb connection code to a method.
 
 
 ## To Do
 
-- Test service and User stories 2 to 6
+- Test database service and User stories 2 to 6
 - Tests for the database
   - mocking the data
 - Use new methods for mongodb
