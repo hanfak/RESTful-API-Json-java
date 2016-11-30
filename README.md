@@ -2,7 +2,7 @@
 
 ## Task
 
-(See here for instructions on challenge)[/task.md]
+(See here for instructions on challenge)[https://github.com/hanfak/RESTful-API-Json-java/blob/master/task.md/task.md]
 
 ## User Stories (US)
 
